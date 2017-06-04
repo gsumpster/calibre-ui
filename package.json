@@ -90,6 +90,8 @@
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
     "redux": "^3.6.0",
-    "regenerator-runtime": "^0.10.5"
+    "regenerator-runtime": "^0.10.5",
+    "semantic-ui-css": "^2.2.10",
+    "semantic-ui-react": "^0.68.5"
   }
 }

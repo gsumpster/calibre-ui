@@ -24,15 +24,20 @@ import { mergeData } from 'kit/lib/apollo';
 // NotFound 404 handler for unknown routes
 import { NotFound, Redirect } from 'kit/lib/routing';
 
+import Header from 'src/components/Header/Header';
+
 // Styles
 import './styles.global.css';
+import Book from 'src/components/Book/Book';
 import css from './styles.css';
 import sass from './styles.scss';
 import less from './styles.less';
 
+
 // Get the ReactQL logo.  This is a local .svg file, which will be made
 // available as a string relative to [root]/dist/assets/img/
 import logo from './reactql-logo.svg';
+
 
 // ----------------------
 
@@ -86,8 +91,12 @@ const Stats = () => {
 // sample endpoint
 const query = gql`
   query {
-    allMessages(first:1) {
-      text
+    books {
+      title
+      cover
+      author {
+        name
+      }
     }
   }
 `;
@@ -99,9 +108,9 @@ const query = gql`
 class GraphQLMessage extends React.PureComponent {
   static propTypes = {
     data: mergeData({
-      allMessages: PropTypes.arrayOf(
+      books: PropTypes.arrayOf(
         PropTypes.shape({
-          text: PropTypes.string.isRequired,
+          title: PropTypes.string.isRequired,
         }),
       ),
     }),
@@ -109,25 +118,15 @@ class GraphQLMessage extends React.PureComponent {
 
   render() {
     const { data } = this.props;
-    const message = data.allMessages && data.allMessages[0].text;
-    const isLoading = data.loading ? 'yes' : 'nope';
+    const message = data.books;
+    const isLoading = data.loading;
     return (
-      <div>
-        <h2>Message from GraphQL server: <em>{message}</em></h2>
-        <h2>Currently loading?: {isLoading}</h2>
+      <div className={css.books}>
+        {!isLoading && data.books.slice(0,7).map(book => <Book book={book} />)}
       </div>
     );
   }
 }
-
-// Example of CSS, SASS and LESS styles being used together
-const Styles = () => (
-  <ul className={css.styleExamples}>
-    <li className={css.example}>Styled by CSS</li>
-    <li className={sass.example}>Styled by SASS</li>
-    <li className={less.example}>Styled by LESS</li>
-  </ul>
-);
 
 // Export a simple component that allows clicking on list items to change
 // the route, along with a <Route> 'listener' that will conditionally display
@@ -140,30 +139,7 @@ export default () => (
         name: 'description',
         content: 'ReactQL starter kit app',
       }]} />
-    <div className={css.hello}>
-      <img src={logo} alt="ReactQL" className={css.logo} />
-    </div>
-    <hr />
+    <Header />
     <GraphQLMessage />
-    <hr />
-    <ul>
-      <li><Link to="/">Home</Link></li>
-      <li><Link to="/page/about">About</Link></li>
-      <li><Link to="/page/contact">Contact</Link></li>
-      <li><Link to="/old/path">Redirect from /old/path &#8594; /new/path</Link></li>
-    </ul>
-    <hr />
-    <Switch>
-      <Route exact path="/" component={Home} />
-      <Route path="/page/:name" component={Page} />
-      <Redirect from="/old/path" to="/new/path" />
-      <Route component={WhenNotFound} />
-    </Switch>
-    <hr />
-    <p>Runtime info:</p>
-    <Stats />
-    <hr />
-    <p>Stylesheet examples:</p>
-    <Styles />
   </div>
 );

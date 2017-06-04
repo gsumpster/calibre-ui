@@ -4,6 +4,11 @@
   --bg: #00bcd4;
 }
 
+.books {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 /* Implictly local.  .hello will get transformed into a hashed class in
 our React code, so that we could also use .hello in conjunction with another
 component without the two clashing */
