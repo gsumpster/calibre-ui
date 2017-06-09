@@ -29,6 +29,7 @@ import Header from 'src/components/Header/Header';
 // Styles
 import './styles.global.css';
 import Book from 'src/components/Book/Book';
+import Sidebar from 'src/components/Sidebar/Sidebar';
 import css from './styles.css';
 import sass from './styles.scss';
 import less from './styles.less';
@@ -140,6 +141,7 @@ export default () => (
         content: 'ReactQL starter kit app',
       }]} />
     <Header />
+    <Sidebar />
     <GraphQLMessage />
   </div>
 );
