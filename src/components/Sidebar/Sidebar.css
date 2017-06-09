@@ -1,0 +1,54 @@
+.header {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+}
+
+.logo
+{
+  display: inline-flex;
+  justify-content: center;
+    svg {
+      height: 20px;
+      position: relative;
+      top: 2px
+    }
+
+    p {
+      margin-left: 10px;
+      font-weight: bold;
+      font-size: 18px;
+      text-transform: uppercase;
+      display: inline-block;
+    }
+}
+
+.navigation {
+  font-weight: bold;
+  font-size: 12px;
+  text-transform: uppercase;
+  p {
+    display: inline-block;
+    letter-spacing: 3px;
+    margin-bottom: 0;
+    &:first-of-type {
+      margin-right: 15px;
+    }
+  }
+}
+
+.subHeader {
+  font-family: "Open Sans", sans-serif;
+  padding: 0 40px;
+  display: flex;
+  height: 60px;
+  background-color: #F2F2F2;
+  justify-content: space-between;
+  align-items: center;
+
+  .active {
+    font-weight: bold;
+  }
+}
